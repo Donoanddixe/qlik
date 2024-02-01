@@ -1,0 +1,706 @@
+SET ThousandSep=',';
+SET DecimalSep='.';
+SET MoneyThousandSep=',';
+SET MoneyDecimalSep='.';
+SET MoneyFormat='$ ###0.00;-$ ###0.00';
+SET TimeFormat='h:mm:ss TT';
+SET DateFormat='M/D/YYYY';
+SET TimestampFormat='M/D/YYYY h:mm:ss[.fff] TT';
+SET FirstWeekDay=6;
+SET BrokenWeeks=1;
+SET ReferenceDay=0;
+SET FirstMonthOfYear=1;
+SET CollationLocale='en-US';
+SET CreateSearchIndexOnReload=1;
+SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
+SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
+SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
+SET NumericalAbbreviation='3:k;6:M;9:G;12:T;15:P;18:E;21:Z;24:Y;-3:m;-6:μ;-9:n;-12:p;-15:f;-18:a;-21:z;-24:y';
+
+
+LIB CONNECT TO 'Testing Scorpion:Scorpion item stats for exposed';
+LIB CONNECT TO 'Testing Scorpion:Scorpion item stats for exposed';
+
+RestConnectorMasterTable:
+SQL SELECT 
+	"has_next",
+	"page",
+	"__KEY_root",
+	(SELECT 
+		"content_area",
+		"created_at" AS "created_at_u1",
+		"created_by_id",
+		"difficulty",
+		"exam_id",
+		"id" AS "id_u1",
+		"is_deleted",
+		"is_exposed" AS "is_exposed_u0",
+		"latest_item_type",
+		"live_version_id",
+		"live_version_number",
+		"name",
+		"num_versions",
+		"preview",
+		"stats_updated_at",
+		"__KEY_results",
+		"__FK_results",
+		(SELECT 
+			"0bf79704-bd25-40ea-bc70-74cbc994a61e",
+			"27cd46a4-0a8e-4136-bfc6-264678dfabcc",
+			"62112937-026a-4bef-9735-8b72cde8c854",
+			"6c4acad1-44e4-4387-8e6d-23de072a00c6",
+			"stem",
+			"__KEY_preview_fields",
+			"__FK_preview_fields",
+			(SELECT 
+				"@Value",
+				"__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170"
+			FROM "1b6ea7b0-e6a2-4d6e-aa2a-91546773a170" FK "__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170" ArrayValueAlias "@Value"),
+			(SELECT 
+				"@Value" AS "@Value_u0",
+				"__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a"
+			FROM "51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a" FK "__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a" ArrayValueAlias "@Value_u0"),
+			(SELECT 
+				"@Value" AS "@Value_u1",
+				"__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b"
+			FROM "93bd2b73-1a66-41d3-8048-d105d9c2493b" FK "__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b" ArrayValueAlias "@Value_u1")
+		FROM "preview_fields" PK "__KEY_preview_fields" FK "__FK_preview_fields"),
+		(SELECT 
+			"avg_score",
+			"avg_seconds",
+			"avg_seconds_when_correct",
+			"avg_seconds_when_incorrect",
+			"correlation",
+			"discrimination",
+			"exposures_when_updated",
+			"num_responses",
+			"__FK_stats"
+		FROM "stats" FK "__FK_stats"),
+		(SELECT 
+			"created_at",
+			"id",
+			"num_exposures",
+			"version_number",
+			"__KEY_version",
+			"__FK_version",
+			(SELECT 
+				"stem" AS "stem_u0",
+				"__KEY_content",
+				"__FK_content",
+				(SELECT 
+					"text" AS "text_u0",
+					"type",
+					"randomize",
+					"weight",
+					"__KEY_segments",
+					"__FK_segments",
+					(SELECT 
+						"index",
+						"is_correct",
+						"text",
+						"__FK_options"
+					FROM "options" FK "__FK_options")
+				FROM "segments" PK "__KEY_segments" FK "__FK_segments"),
+				(SELECT 
+					"@Value" AS "@Value_u2",
+					"__FK_shared"
+				FROM "shared" FK "__FK_shared" ArrayValueAlias "@Value_u2"),
+				(SELECT 
+					"@Value" AS "@Value_u3",
+					"__FK_widgets"
+				FROM "widgets" FK "__FK_widgets" ArrayValueAlias "@Value_u3"),
+				(SELECT 
+					"@Value" AS "@Value_u4",
+					"__FK_options_u0"
+				FROM "options" FK "__FK_options_u0" ArrayValueAlias "@Value_u4")
+			FROM "content" PK "__KEY_content" FK "__FK_content"),
+			(SELECT 
+				"stem" AS "stem_u1",
+				"__FK_feedback"
+			FROM "feedback" FK "__FK_feedback"),
+			(SELECT 
+				"__KEY_meta",
+				"__FK_meta",
+				(SELECT 
+					"0bf79704-bd25-40ea-bc70-74cbc994a61e" AS "0bf79704-bd25-40ea-bc70-74cbc994a61e_u0",
+					"27cd46a4-0a8e-4136-bfc6-264678dfabcc" AS "27cd46a4-0a8e-4136-bfc6-264678dfabcc_u0",
+					"47ee5c4d-7d02-4037-9f59-53796f36eef7",
+					"62112937-026a-4bef-9735-8b72cde8c854" AS "62112937-026a-4bef-9735-8b72cde8c854_u0",
+					"6c4acad1-44e4-4387-8e6d-23de072a00c6" AS "6c4acad1-44e4-4387-8e6d-23de072a00c6_u0",
+					"__KEY_scorpion",
+					"__FK_scorpion",
+					(SELECT 
+						"@Value" AS "@Value_u5",
+						"__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u0"
+					FROM "1b6ea7b0-e6a2-4d6e-aa2a-91546773a170" FK "__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u0" ArrayValueAlias "@Value_u5"),
+					(SELECT 
+						"@Value" AS "@Value_u6",
+						"__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u0"
+					FROM "51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a" FK "__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u0" ArrayValueAlias "@Value_u6"),
+					(SELECT 
+						"@Value" AS "@Value_u7",
+						"__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u0"
+					FROM "93bd2b73-1a66-41d3-8048-d105d9c2493b" FK "__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u0" ArrayValueAlias "@Value_u7")
+				FROM "scorpion" PK "__KEY_scorpion" FK "__FK_scorpion"),
+				(SELECT 
+					"__FK_6d778e98b175"
+				FROM "6d778e98b175" FK "__FK_6d778e98b175"),
+				(SELECT 
+					"__FK_a5b26ebf80a6"
+				FROM "a5b26ebf80a6" FK "__FK_a5b26ebf80a6")
+			FROM "meta" PK "__KEY_meta" FK "__FK_meta"),
+			(SELECT 
+				"cutscore_min",
+				"points",
+				"scoring",
+				"type" AS "type_u0",
+				"distractors_to_present",
+				"keys_to_present",
+				"presentation_order",
+				"select_all_that_apply",
+				"selection_limit",
+				"__KEY_settings",
+				"__FK_settings",
+				(SELECT 
+					"@Value" AS "@Value_u8",
+					"__FK_key"
+				FROM "key" FK "__FK_key" ArrayValueAlias "@Value_u8")
+			FROM "settings" PK "__KEY_settings" FK "__FK_settings"),
+			(SELECT 
+				"avg_score" AS "avg_score_u0",
+				"avg_seconds" AS "avg_seconds_u0",
+				"avg_seconds_when_correct" AS "avg_seconds_when_correct_u0",
+				"avg_seconds_when_incorrect" AS "avg_seconds_when_incorrect_u0",
+				"correlation" AS "correlation_u0",
+				"discrimination" AS "discrimination_u0",
+				"num_responses" AS "num_responses_u0",
+				"__KEY_stats",
+				"__FK_stats_u0",
+				(SELECT 
+					"@Value" AS "@Value_u9",
+					"__FK_blank_percent_correct"
+				FROM "blank_percent_correct" FK "__FK_blank_percent_correct" ArrayValueAlias "@Value_u9"),
+				(SELECT 
+					"__KEY_blank_responses",
+					"__FK_blank_responses",
+					(SELECT 
+						"@Value" AS "@Value_u10",
+						"__FK_blank_responses_u0"
+					FROM "blank_responses" FK "__FK_blank_responses_u0" ArrayValueAlias "@Value_u10")
+				FROM "blank_responses" PK "__KEY_blank_responses" FK "__FK_blank_responses")
+			FROM "stats" PK "__KEY_stats" FK "__FK_stats_u0"),
+			(SELECT 
+				"__FK_watermark_schema"
+			FROM "watermark_schema" FK "__FK_watermark_schema")
+		FROM "version" PK "__KEY_version" FK "__FK_version"),
+		(SELECT 
+			"created_at" AS "created_at_u0",
+			"id" AS "id_u0",
+			"is_exposed",
+			"version_number" AS "version_number_u0",
+			"__KEY_versions",
+			"__FK_versions",
+			(SELECT 
+				"stem" AS "stem_u2",
+				"__KEY_content_u0",
+				"__FK_content_u0",
+				(SELECT 
+					"text" AS "text_u2",
+					"type" AS "type_u1",
+					"randomize" AS "randomize_u0",
+					"weight" AS "weight_u0",
+					"__KEY_segments_u0",
+					"__FK_segments_u0",
+					(SELECT 
+						"index" AS "index_u0",
+						"is_correct" AS "is_correct_u0",
+						"text" AS "text_u1",
+						"__FK_options_u1"
+					FROM "options" FK "__FK_options_u1")
+				FROM "segments" PK "__KEY_segments_u0" FK "__FK_segments_u0"),
+				(SELECT 
+					"@Value" AS "@Value_u11",
+					"__FK_shared_u0"
+				FROM "shared" FK "__FK_shared_u0" ArrayValueAlias "@Value_u11"),
+				(SELECT 
+					"@Value" AS "@Value_u12",
+					"__FK_widgets_u0"
+				FROM "widgets" FK "__FK_widgets_u0" ArrayValueAlias "@Value_u12"),
+				(SELECT 
+					"@Value" AS "@Value_u13",
+					"__FK_options_u2"
+				FROM "options" FK "__FK_options_u2" ArrayValueAlias "@Value_u13")
+			FROM "content" PK "__KEY_content_u0" FK "__FK_content_u0"),
+			(SELECT 
+				"stem" AS "stem_u3",
+				"__FK_feedback_u0"
+			FROM "feedback" FK "__FK_feedback_u0"),
+			(SELECT 
+				"__KEY_meta_u0",
+				"__FK_meta_u0",
+				(SELECT 
+					"0bf79704-bd25-40ea-bc70-74cbc994a61e" AS "0bf79704-bd25-40ea-bc70-74cbc994a61e_u1",
+					"27cd46a4-0a8e-4136-bfc6-264678dfabcc" AS "27cd46a4-0a8e-4136-bfc6-264678dfabcc_u1",
+					"47ee5c4d-7d02-4037-9f59-53796f36eef7" AS "47ee5c4d-7d02-4037-9f59-53796f36eef7_u0",
+					"62112937-026a-4bef-9735-8b72cde8c854" AS "62112937-026a-4bef-9735-8b72cde8c854_u1",
+					"6c4acad1-44e4-4387-8e6d-23de072a00c6" AS "6c4acad1-44e4-4387-8e6d-23de072a00c6_u1",
+					"__KEY_scorpion_u0",
+					"__FK_scorpion_u0",
+					(SELECT 
+						"@Value" AS "@Value_u14",
+						"__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u1"
+					FROM "1b6ea7b0-e6a2-4d6e-aa2a-91546773a170" FK "__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u1" ArrayValueAlias "@Value_u14"),
+					(SELECT 
+						"@Value" AS "@Value_u15",
+						"__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u1"
+					FROM "51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a" FK "__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u1" ArrayValueAlias "@Value_u15"),
+					(SELECT 
+						"@Value" AS "@Value_u16",
+						"__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u1"
+					FROM "93bd2b73-1a66-41d3-8048-d105d9c2493b" FK "__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u1" ArrayValueAlias "@Value_u16")
+				FROM "scorpion" PK "__KEY_scorpion_u0" FK "__FK_scorpion_u0"),
+				(SELECT 
+					"__FK_6d778e98b175_u0"
+				FROM "6d778e98b175" FK "__FK_6d778e98b175_u0"),
+				(SELECT 
+					"__FK_a5b26ebf80a6_u0"
+				FROM "a5b26ebf80a6" FK "__FK_a5b26ebf80a6_u0")
+			FROM "meta" PK "__KEY_meta_u0" FK "__FK_meta_u0"),
+			(SELECT 
+				"cutscore_min" AS "cutscore_min_u0",
+				"points" AS "points_u0",
+				"scoring" AS "scoring_u0",
+				"type" AS "type_u2",
+				"distractors_to_present" AS "distractors_to_present_u0",
+				"keys_to_present" AS "keys_to_present_u0",
+				"presentation_order" AS "presentation_order_u0",
+				"select_all_that_apply" AS "select_all_that_apply_u0",
+				"selection_limit" AS "selection_limit_u0",
+				"__KEY_settings_u0",
+				"__FK_settings_u0",
+				(SELECT 
+					"@Value" AS "@Value_u17",
+					"__FK_key_u0"
+				FROM "key" FK "__FK_key_u0" ArrayValueAlias "@Value_u17")
+			FROM "settings" PK "__KEY_settings_u0" FK "__FK_settings_u0"),
+			(SELECT 
+				"__FK_watermark_schema_u0"
+			FROM "watermark_schema" FK "__FK_watermark_schema_u0")
+		FROM "versions" PK "__KEY_versions" FK "__FK_versions")
+	FROM "results" PK "__KEY_results" FK "__FK_results")
+FROM JSON (wrap on) "root" PK "__KEY_root"
+WITH CONNECTION (Url "https://scorpion.caveon.com/api/exams/d22e7311-1125-46c2-accc-e9f7e2fecb7f/items/506afdf3-10d8-4c30-922e-baa2184ac302?include=stats,version");
+;
+
+[1b6ea7b0-e6a2-4d6e-aa2a-91546773a170]:
+LOAD	[@Value],
+	[__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170] AS [__KEY_preview_fields]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170]);
+
+
+[51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a]:
+LOAD	[@Value_u0] AS [@Value_u0],
+	[__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a] AS [__KEY_preview_fields]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a]);
+
+
+[93bd2b73-1a66-41d3-8048-d105d9c2493b]:
+LOAD	[@Value_u1] AS [@Value_u1],
+	[__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b] AS [__KEY_preview_fields]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b]);
+
+
+[preview_fields]:
+LOAD	[0bf79704-bd25-40ea-bc70-74cbc994a61e],
+	[27cd46a4-0a8e-4136-bfc6-264678dfabcc],
+	[62112937-026a-4bef-9735-8b72cde8c854],
+	[6c4acad1-44e4-4387-8e6d-23de072a00c6],
+	[stem],
+	[__KEY_preview_fields],
+	[__FK_preview_fields] AS [__KEY_results]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_preview_fields]);
+
+
+[stats]:
+LOAD	[avg_score],
+	[avg_seconds],
+	[avg_seconds_when_correct],
+	[avg_seconds_when_incorrect],
+	[correlation],
+	[discrimination],
+	[exposures_when_updated],
+	[num_responses],
+	[__FK_stats] AS [__KEY_results]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_stats]);
+
+
+[options]:
+LOAD	[index],
+	[is_correct],
+	[text],
+	[__FK_options] AS [__KEY_segments]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_options]);
+
+
+[segments]:
+LOAD	[text_u0] AS [text_u0],
+	[type],
+	[randomize],
+	[weight],
+	[__KEY_segments],
+	[__FK_segments] AS [__KEY_content]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_segments]);
+
+
+[shared]:
+LOAD	[@Value_u2] AS [@Value_u2],
+	[__FK_shared] AS [__KEY_content]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_shared]);
+
+
+[widgets]:
+LOAD	[@Value_u3] AS [@Value_u3],
+	[__FK_widgets] AS [__KEY_content]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_widgets]);
+
+
+[options_u0]:
+LOAD	[@Value_u4] AS [@Value_u4],
+	[__FK_options_u0] AS [__KEY_content]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_options_u0]);
+
+
+[content]:
+LOAD	[stem_u0] AS [stem_u0],
+	[__KEY_content],
+	[__FK_content] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_content]);
+
+
+[feedback]:
+LOAD	[stem_u1] AS [stem_u1],
+	[__FK_feedback] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_feedback]);
+
+
+[1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u0]:
+LOAD	[@Value_u5] AS [@Value_u5],
+	[__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u0] AS [__KEY_scorpion]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u0]);
+
+
+[51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u0]:
+LOAD	[@Value_u6] AS [@Value_u6],
+	[__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u0] AS [__KEY_scorpion]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u0]);
+
+
+[93bd2b73-1a66-41d3-8048-d105d9c2493b_u0]:
+LOAD	[@Value_u7] AS [@Value_u7],
+	[__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u0] AS [__KEY_scorpion]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u0]);
+
+
+[scorpion]:
+LOAD	[0bf79704-bd25-40ea-bc70-74cbc994a61e_u0] AS [0bf79704-bd25-40ea-bc70-74cbc994a61e_u0],
+	[27cd46a4-0a8e-4136-bfc6-264678dfabcc_u0] AS [27cd46a4-0a8e-4136-bfc6-264678dfabcc_u0],
+	[47ee5c4d-7d02-4037-9f59-53796f36eef7],
+	[62112937-026a-4bef-9735-8b72cde8c854_u0] AS [62112937-026a-4bef-9735-8b72cde8c854_u0],
+	[6c4acad1-44e4-4387-8e6d-23de072a00c6_u0] AS [6c4acad1-44e4-4387-8e6d-23de072a00c6_u0],
+	[__KEY_scorpion],
+	[__FK_scorpion] AS [__KEY_meta]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_scorpion]);
+
+
+[6d778e98b175]:
+LOAD	[__FK_6d778e98b175] AS [__KEY_meta]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_6d778e98b175]);
+
+
+[a5b26ebf80a6]:
+LOAD	[__FK_a5b26ebf80a6] AS [__KEY_meta]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_a5b26ebf80a6]);
+
+
+[meta]:
+LOAD	[__KEY_meta],
+	[__FK_meta] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_meta]);
+
+
+[key]:
+LOAD	[@Value_u8] AS [@Value_u8],
+	[__FK_key] AS [__KEY_settings]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_key]);
+
+
+[settings]:
+LOAD	[cutscore_min],
+	[points],
+	[scoring],
+	[type_u0] AS [type_u0],
+	[distractors_to_present],
+	[keys_to_present],
+	[presentation_order],
+	[select_all_that_apply],
+	[selection_limit],
+	[__KEY_settings],
+	[__FK_settings] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_settings]);
+
+
+[blank_percent_correct]:
+LOAD	[@Value_u9] AS [@Value_u9],
+	[__FK_blank_percent_correct] AS [__KEY_stats]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_blank_percent_correct]);
+
+
+[blank_responses]:
+LOAD	[@Value_u10] AS [@Value_u10],
+	[__FK_blank_responses_u0] AS [__KEY_blank_responses]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_blank_responses_u0]);
+
+
+[blank_responses_u0]:
+LOAD	[__KEY_blank_responses],
+	[__FK_blank_responses] AS [__KEY_stats]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_blank_responses]);
+
+
+[stats_u0]:
+LOAD	[avg_score_u0] AS [avg_score_u0],
+	[avg_seconds_u0] AS [avg_seconds_u0],
+	[avg_seconds_when_correct_u0] AS [avg_seconds_when_correct_u0],
+	[avg_seconds_when_incorrect_u0] AS [avg_seconds_when_incorrect_u0],
+	[correlation_u0] AS [correlation_u0],
+	[discrimination_u0] AS [discrimination_u0],
+	[num_responses_u0] AS [num_responses_u0],
+	[__KEY_stats],
+	[__FK_stats_u0] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_stats_u0]);
+
+
+[watermark_schema]:
+LOAD	[__FK_watermark_schema] AS [__KEY_version]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_watermark_schema]);
+
+
+[version]:
+LOAD	[created_at],
+	[id],
+	[num_exposures],
+	[version_number],
+	[__KEY_version],
+	[__FK_version] AS [__KEY_results]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_version]);
+
+
+[options_u1]:
+LOAD	[index_u0] AS [index_u0],
+	[is_correct_u0] AS [is_correct_u0],
+	[text_u1] AS [text_u1],
+	[__FK_options_u1] AS [__KEY_segments_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_options_u1]);
+
+
+[segments_u0]:
+LOAD	[text_u2] AS [text_u2],
+	[type_u1] AS [type_u1],
+	[randomize_u0] AS [randomize_u0],
+	[weight_u0] AS [weight_u0],
+	[__KEY_segments_u0],
+	[__FK_segments_u0] AS [__KEY_content_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_segments_u0]);
+
+
+[shared_u0]:
+LOAD	[@Value_u11] AS [@Value_u11],
+	[__FK_shared_u0] AS [__KEY_content_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_shared_u0]);
+
+
+[widgets_u0]:
+LOAD	[@Value_u12] AS [@Value_u12],
+	[__FK_widgets_u0] AS [__KEY_content_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_widgets_u0]);
+
+
+[options_u2]:
+LOAD	[@Value_u13] AS [@Value_u13],
+	[__FK_options_u2] AS [__KEY_content_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_options_u2]);
+
+
+[content_u0]:
+LOAD	[stem_u2] AS [stem_u2],
+	[__KEY_content_u0],
+	[__FK_content_u0] AS [__KEY_versions]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_content_u0]);
+
+
+[feedback_u0]:
+LOAD	[stem_u3] AS [stem_u3],
+	[__FK_feedback_u0] AS [__KEY_versions]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_feedback_u0]);
+
+
+[1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u1]:
+LOAD	[@Value_u14] AS [@Value_u14],
+	[__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u1] AS [__KEY_scorpion_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_1b6ea7b0-e6a2-4d6e-aa2a-91546773a170_u1]);
+
+
+[51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u1]:
+LOAD	[@Value_u15] AS [@Value_u15],
+	[__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u1] AS [__KEY_scorpion_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_51ecc704-63d8-4f9b-b2b3-5ae720d3cb2a_u1]);
+
+
+[93bd2b73-1a66-41d3-8048-d105d9c2493b_u1]:
+LOAD	[@Value_u16] AS [@Value_u16],
+	[__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u1] AS [__KEY_scorpion_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_93bd2b73-1a66-41d3-8048-d105d9c2493b_u1]);
+
+
+[scorpion_u0]:
+LOAD	[0bf79704-bd25-40ea-bc70-74cbc994a61e_u1] AS [0bf79704-bd25-40ea-bc70-74cbc994a61e_u1],
+	[27cd46a4-0a8e-4136-bfc6-264678dfabcc_u1] AS [27cd46a4-0a8e-4136-bfc6-264678dfabcc_u1],
+	[47ee5c4d-7d02-4037-9f59-53796f36eef7_u0] AS [47ee5c4d-7d02-4037-9f59-53796f36eef7_u0],
+	[62112937-026a-4bef-9735-8b72cde8c854_u1] AS [62112937-026a-4bef-9735-8b72cde8c854_u1],
+	[6c4acad1-44e4-4387-8e6d-23de072a00c6_u1] AS [6c4acad1-44e4-4387-8e6d-23de072a00c6_u1],
+	[__KEY_scorpion_u0],
+	[__FK_scorpion_u0] AS [__KEY_meta_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_scorpion_u0]);
+
+
+[6d778e98b175_u0]:
+LOAD	[__FK_6d778e98b175_u0] AS [__KEY_meta_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_6d778e98b175_u0]);
+
+
+[a5b26ebf80a6_u0]:
+LOAD	[__FK_a5b26ebf80a6_u0] AS [__KEY_meta_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_a5b26ebf80a6_u0]);
+
+
+[meta_u0]:
+LOAD	[__KEY_meta_u0],
+	[__FK_meta_u0] AS [__KEY_versions]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_meta_u0]);
+
+
+[key_u0]:
+LOAD	[@Value_u17] AS [@Value_u17],
+	[__FK_key_u0] AS [__KEY_settings_u0]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_key_u0]);
+
+
+[settings_u0]:
+LOAD	[cutscore_min_u0] AS [cutscore_min_u0],
+	[points_u0] AS [points_u0],
+	[scoring_u0] AS [scoring_u0],
+	[type_u2] AS [type_u2],
+	[distractors_to_present_u0] AS [distractors_to_present_u0],
+	[keys_to_present_u0] AS [keys_to_present_u0],
+	[presentation_order_u0] AS [presentation_order_u0],
+	[select_all_that_apply_u0] AS [select_all_that_apply_u0],
+	[selection_limit_u0] AS [selection_limit_u0],
+	[__KEY_settings_u0],
+	[__FK_settings_u0] AS [__KEY_versions]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_settings_u0]);
+
+
+[watermark_schema_u0]:
+LOAD	[__FK_watermark_schema_u0] AS [__KEY_versions]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_watermark_schema_u0]);
+
+
+[versions]:
+LOAD	[created_at_u0] AS [created_at_u0],
+	[id_u0] AS [id_u0],
+	[is_exposed],
+	[version_number_u0] AS [version_number_u0],
+	[__KEY_versions],
+	[__FK_versions] AS [__KEY_results]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_versions]);
+
+
+[results]:
+LOAD	[content_area],
+	[created_at_u1] AS [created_at_u1],
+	[created_by_id],
+	[difficulty],
+	[exam_id],
+	[id_u1] AS [id_u1],
+	[is_deleted],
+	[is_exposed_u0] AS [is_exposed_u0],
+	[latest_item_type],
+	[live_version_id],
+	[live_version_number],
+	[name],
+	[num_versions],
+	[preview],
+	[stats_updated_at],
+	[__KEY_results],
+	[__FK_results] AS [__KEY_root]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_results]);
+
+
+[root]:
+LOAD	[has_next],
+	[page],
+	[__KEY_root]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__KEY_root]);
+
+
+DROP TABLE RestConnectorMasterTable;
+
+
